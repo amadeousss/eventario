@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+<body>
+<div>
+    <div class="container my-3">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <h2>Регистрация</h2>
+                <form th:object="${userForm}" method="POST">
+                    <div class="form-row">
+
+                        <div class="col-md-6 form-group">
+                            <label>Имя</label>
+                            <input type="text" class="form-control" th:field="*{firstName}">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Фамилия</label>
+                            <input type="text" class="form-control" th:field="*{lastName}">
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                            <label>Почта</label>
+                            <input type="email" class="form-control" th:field="*{email}">
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                            <label>Логин</label>
+                            <input type="text" class="form-control" th:field="*{username}">
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                            <label>Пароль</label>
+                            <input type="password" class="form-control" th:field="*{password}">
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                            <label>Подтверждение пароля</label>
+                            <input type="password" class="form-control" th:field="*{passwordConfirm}">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block mt-3">Зарегистрироваться</button>
+                </form>
+                <a th:href="@{/login}">Войти</a><br>
+                <a href="/">Главная</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

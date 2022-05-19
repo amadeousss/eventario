@@ -1,0 +1,109 @@
+<!doctype html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.14.3/dist/full.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+          integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Eventario</title>
+</head>
+<body>
+<div class="navbar bg-base-200 px-14">
+    <div class="flex-1">
+        <a th:href="@{/}" class="btn btn-ghost normal-case text-xl">Eventario</a>
+    </div>
+    <div class="flex-none">
+        <div sec:authorize="isAuthenticated()">
+            <div class="dropdown dropdown-end">
+                <div class="flex">
+                    <span class="self-center mr-4" th:text="${#authentication.name}">Amady</span>
+                    <label tabindex=" 0" class="btn btn-ghost btn-circle avatar">
+                        <div class="w-10 rounded-full" style="display: grid; align-items: center">
+                            <div>
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+                <ul tabindex="0"
+                    class="menu menu-compact dropdown-content mt-4 p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a th:href="@{/order}">Заказать мероприятие</a></li>
+                    <li><a th:href="@{/events}">Мои мероприятия</a></li>
+                    <li><a th:href="@{/logout}">Выйти</a></li>
+                </ul>
+            </div>
+        </div>
+        <div sec:authorize="!isAuthenticated()">
+            <p><a th:href="@{/login}">Войти</a></p>
+        </div>
+    </div>
+</div>
+<section>
+    <div class="container flex justify-around">
+        <div class="text self-center">
+            <h1 class="text-8xl font-bold">Eventario</h1>
+            <h2 class="mt-2 text-4xl font-thin">Агентство по организации мероприятий</h2>
+        </div>
+<!--        <div class="illustration">-->
+<!--            <img class="max-w-xl" src="1.png" alt="">-->
+<!--        </div>-->
+    </div>
+</section>
+<section class="bg-orange-400">
+    <h1 class="pt-8 mt-8 text-center text-6xl font-bold text-white">Мероприятия</h1>
+    <h2 class="mt-8 text-2xl font-thin text-center text-white">Последние из проведенных нами мероприятий</h2>
+    <div class="pb-12 grid grid-cols-2 gap-y-16 mx-auto justify-center mt-12 max-w-4xl">
+        <div class="card w-96 bg-base-100 shadow-xl">
+            <figure><img
+                    src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+                    alt="Shoes"/></figure>
+            <div class="card-body">
+                <h2 class="card-title">Свадьба Ивановых!</h2>
+                <p>Прекрасная свадьба на природе!</p>
+            </div>
+        </div>
+        <div class="card w-96 bg-base-100 shadow-xl">
+            <figure><img class="object-cover"
+                         src="https://images.unsplash.com/photo-1464207687429-7505649dae38?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80"
+                         alt="Shoes"/></figure>
+            <div class="card-body">
+                <h2 class="card-title">День рождения на природе!</h2>
+                <p>Невероятно атмосферные посиделки у озера! Мы организовали вечеринку в честь дгня рождения.</p>
+            </div>
+        </div>
+        <div class="card w-96 bg-base-100 shadow-xl">
+            <figure><img
+                    src="https://images.unsplash.com/photo-1515169067868-5387ec356754?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+                    alt="Shoes"/></figure>
+            <div class="card-body">
+                <h2 class="card-title">Корпоратив!</h2>
+                <p>Организован уютный корпоратив для местной компании.</p>
+            </div>
+        </div>
+        <div class="card w-96 bg-base-100 shadow-xl">
+            <figure><img
+                    src="https://images.unsplash.com/photo-1519671282429-b44660ead0a7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+                    alt="Shoes"/></figure>
+            <div class="card-body">
+                <h2 class="card-title">Новоселье!</h2>
+                <p>Устроили новоселье, которым все остались очень довольны!</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="mb-12">
+    <h1 class="pt-8 mt-8 text-center text-6xl font-bold">Организовать</h1>
+    <h2 class="mt-8 text-2xl font-thin text-center">Если вы желаете организовать мероприятие,<br> нажмите на кнопку</h2>
+    <div class='mt-8 flex items-center justify-center'>
+        <a th:href="@{/order}" class="btn btn-success center">Заказать мероприятие</a>
+    </div>
+</section>
+</body>
+</html>

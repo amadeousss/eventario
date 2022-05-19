@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Заказ</title>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.14.3/dist/full.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+          integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+
+<div class="navbar bg-base-200 px-14">
+    <div class="flex-1">
+        <a th:href="@{/}" class="btn btn-ghost normal-case text-xl">Eventario</a>
+    </div>
+    <div class="flex-none">
+        <div sec:authorize="isAuthenticated()">
+            <div class="dropdown dropdown-end">
+                <div class="flex">
+                    <span class="self-center mr-4" th:text="${#authentication.name}">Amady</span>
+                    <label tabindex=" 0" class="btn btn-ghost btn-circle avatar">
+                        <div class="w-10 rounded-full" style="display: grid; align-items: center">
+                            <div>
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+                <ul tabindex="0"
+                    class="menu menu-compact dropdown-content mt-4 p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a th:href="@{/order}">Заказать мероприятие</a></li>
+                    <li><a th:href="@{/events}">Мои мероприятия</a></li>
+                    <li><a th:href="@{/logout}">Выйти</a></li>
+                </ul>
+            </div>
+        </div>
+        <div sec:authorize="!isAuthenticated()">
+            <p><a th:href="@{/login}">Войти</a></p>
+        </div>
+    </div>
+</div>
+
+
+<div th:if="${!events.isEmpty()}" class="mt-6 overflow-x-auto max-w-screen-lg container mx-auto">
+    <table class="table w-full">
+        <!-- head -->
+        <thead>
+        <tr>
+            <th>Мероприятие</th>
+            <th>Описание</th>
+            <th>Дата заявки</th>
+            <th>Статус заявки</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="event: ${events}">
+            <td th:text="${event.name}"></td>
+            <td th:text="${event.description}">Описание отсутствует</td>
+            <td th:text="${event.created}"></td>
+            <td th:text="${event.status}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div th:if="${events.isEmpty()}" class="container max-w-screen-md">
+    <h1 class="pt-8 mt-8 text-center text-6xl font-bold">У вас нет мероприятий</h1>
+    <h2 class="mt-8 text-2xl font-thin text-center">Чтобы заказать мероприятие, нажмите на кнопку снизу</h2>
+    <div class='mt-8 flex items-center justify-center'>
+        <a th:href="@{/order}" class="btn btn-success center">Заказать мероприятие</a>
+    </div>
+</div>
+
+
+</body>
+</html>
